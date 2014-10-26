@@ -14,18 +14,18 @@ Simulacion1(:,1)=Simulacion1(:,1)*1000;	% Normalización a mV
 Simulacion2(:,1)=Simulacion2(:,1)*1000;
 
 
-Param=fmins('A_x_mas_B',[0.1 5],[0,0.0001,0,0,0,0,0,0,0,],[],Medicion1(21:end,:)');	
+Param=fmins('A_x_mas_B',[0.1 5],[0,0.0001,0,0,0,0,0,0,0,],[],Medicion1(20:end,:)');	
 ro1=1/Param(1)
 Ic_sat1=Param(2)
 Va1=ro1*Ic_sat1
 
 
-Param=fmins('A_x_mas_B',[0.1 5],[0,0.0001,0,0,0,0,0,0,0,],[],Medicion2(23:end,:)');	
+Param=fmins('A_x_mas_B',[0.1 5],[0,0.0001,0,0,0,0,0,0,0,],[],Medicion2(20:end,:)');	
 ro2=1/Param(1)
 Ic_sat2=Param(2)
 Va2=ro2*Ic_sat2
 
-Param=fmins('A_x_mas_B',[0.1 5],[0,0.0001,0,0,0,0,0,0,0,],[],Medicion3(23:end,:)');	
+Param=fmins('A_x_mas_B',[0.1 5],[0,0.0001,0,0,0,0,0,0,0,],[],Medicion3(20:end,:)');	
 ro3=1/Param(1)	
 Ic_sat3=Param(2)
 Va3=ro3*Ic_sat3
@@ -56,8 +56,8 @@ plot(Medicion1(:,1),Medicion1(:,2),'ro','Markersize',6)
 plot(Medicion2(:,1),Medicion2(:,2),'go','Markersize',6)
 plot(Medicion3(:,1),Medicion3(:,2),'bo','Markersize',6)
 plot(V(inicio_v:end),(1/ro1)*V(inicio_v:end)+Ic_sat1,'r-','Linewidth',1)
-plot(V(inicio_v+200:end),(1/ro2)*V(inicio_v+200:end)+Ic_sat2,'g-','Linewidth',1)
-plot(V(inicio_v+200:end),(1/ro3)*V(inicio_v+200:end)+Ic_sat3,'b-','Linewidth',1)
+plot(V(inicio_v:end),(1/ro2)*V(inicio_v:end)+Ic_sat2,'g-','Linewidth',1)
+plot(V(inicio_v:end),(1/ro3)*V(inicio_v:end)+Ic_sat3,'b-','Linewidth',1)
 
 
 legend(	sprintf('philips ro5 = %e mA  Va= %e mV', ro4, Va4),
