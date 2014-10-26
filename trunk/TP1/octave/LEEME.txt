@@ -1,0 +1,56 @@
+-----------------------------------------------------------------------------------
+ Dispositivos Semiconductores 66.25
+ http://www.fi.uba.ar/materias/6625
+  Contenido: Archivo de ayuda para la instalacion de paquetes de Octave
+  Autor: Diego Fanego
+  Fecha: 28 de marzo de 2010
+-----------------------------------------------------------------------------------
+	
+	Para lograr que el script del TP corra correctamente en Octave se debe
+instalar, ademas del Octave obviamente, dos paquetes de Octave-Forge. Estos son
+"optim" y "miscellneous".
+	En algunas distribuciones GNU/Linux estos paquetes se encuentran en los
+repositorios. Por ejemplo, en debian, estos paquetes se encuentran en el repositorio
+oficial bajo el nombre de "octave-optim" y "octave-miscellaneous". De esta forma, 
+si se encuentran en los repositorios de la distribucion que esten utilizando, se 
+intalan mediante su gestor de paquetes preferido y listo, ya estan en condiciones 
+de correr los script sin problemas.
+	En el caso en que estos paquetes no esten en los repositorios de la 
+distribucion que estan utilizando deben bajarlos de la pagina de Octave-Forge, 
+http://octave.sourceforge.net. Una vez descargados ambos paquetes deben instalarlos 
+desde dentro de Octave de la siguiente forma
+
+	octave:1>cd directorio_donde_estan_los_paquetes_descargados
+	octave:2>pkg install miscellaneous-X.X.X.tar.gz
+	octave:3>pkg install optim-X.X.X.tar.gz
+
+donde X.X.X representa el numero de version correspondiente de cada paquete. El 
+orden de instalacion de los paquetes es importante ya que el paquete "optim" 
+depende del paquete "miscellaneous". Con esto es suficiente para correr los 
+script.
+	Para verificar que los paquetes estan cargado, y las funciones que estos 
+proporcionan disponibles para su uso, se ejecuta la siguiente linea
+
+	octave:4>pkg list
+
+donde obtendremos una salida del siguiente tipo
+
+	Package Name   | Version | Installation directory
+	---------------+---------+-----------------------
+	miscellaneous *|   X.X.X | /usr/share/octave/packages/miscellaneous-X.X.X
+			optim *|   X.X.X | /usr/share/octave/packages/optim-X.X.X
+
+el asterisco '*' al lado del nombre del paquete indica que este esta cargado. En 
+caso que el paquete no este carga se carga de la siguiente manera
+
+	octave:5>pkg load nombre_del_paquete
+
+	Si ambos paquetes estan cargado ya pueden ejecutar el script
+
+	octave:6>ayuda_TP1_Octave
+
+y con esto estar en condiciones de realizar el TP utilizando Octave.
+
+	Todo esto fue realizado en la version 3.0 de Octave. No tuve oportunidad 
+de probarlo en versiones anteriores, en cuanto a las versiones posteriores supongo 
+que no debe haber diferencias y el script deberia andar.
