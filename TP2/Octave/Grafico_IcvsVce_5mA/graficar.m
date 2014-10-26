@@ -20,12 +20,12 @@ Ic_sat1=Param(2)
 Va1=ro1*Ic_sat1
 
 
-Param=fmins('A_x_mas_B',[0.1 5],[0,0.0001,0,0,0,0,0,0,0,],[],Medicion2(20:end,:)');	
+Param=fmins('A_x_mas_B',[0.1 5],[0,0.0001,0,0,0,0,0,0,0,],[],Medicion2(15:end,:)');	
 ro2=1/Param(1)
 Ic_sat2=Param(2)
 Va2=ro2*Ic_sat2
 
-Param=fmins('A_x_mas_B',[0.1 5],[0,0.0001,0,0,0,0,0,0,0,],[],Medicion3(20:end,:)');	
+Param=fmins('A_x_mas_B',[0.1 5],[0,0.0001,0,0,0,0,0,0,0,],[],Medicion3(15:end,:)');	
 ro3=1/Param(1)	
 Ic_sat3=Param(2)
 Va3=ro3*Ic_sat3
