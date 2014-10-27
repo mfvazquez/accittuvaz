@@ -69,7 +69,7 @@ legend(	sprintf('philips ro5 = %e mA  Va= %e mV', ro4, Va4),
 
 
 
-xlabel('Tension Vce [V]')
+xlabel('Tension Vce [mV]')
 ylabel('Corriente Ic [mA]')
 axis([0 5000 4 6.5])
 grid minor
