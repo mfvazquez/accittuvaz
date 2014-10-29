@@ -77,11 +77,119 @@
 \date{30 de octubre de 2014}
 \maketitle
 
-\begin{abstract}
-\emph{}
+\begin{abstract} %Resumen
+\emph{En el siguiente trabajo se analizan las principales características de polarización y frecuencias medias de transistores TBJ tipo NPN. Estudiando las curvas de transferencia y de salida, obtenidas en mediciones, se consiguen los parámetros característicos y se calculan los parámetros de pequeña señal. Finalmente se realiza un modelo básico de Spice con los parámetros calculados y se presentan simulaciones para contrastar con las mediciones.}
 \end{abstract}
 
+\section{Desarrollo}
+
+A continuación se detalla el desarrollo del trabajo realizado, tanto la realización de las simulaciones mediantes \emph{Spice}, como las mediciones realizadas.
+
+\subsection{Simulación de transistores BC548C}
+
+En primera instancia se obtuvieron con \emph{LTSPICE} las curvas de transferencia, la ganancia de corriente entre base y colector y las curvas de salida  propias al transistor. Usando las bibliotecas  
+ \texttt{PHIL\_BJT} y \texttt{SIEMENS} proporcionadas por la cátedra.
+
+\subsubsection{Curva de transferencia}
+
+Se simuló $I_C$ vs. $V_{BE}$ para $V_{CE} = 1,25 \unit{V}$ para ambas bibliotecas. Se varió la tensión $V_{BE}$ entre $0\unit{V}$ y $0,9\unit{V}$ con pasos de $0,01\unit{V}$, utilizando el circuito simulado en la figura \ref{circuito:simulacion_transferencia}.
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[american]\shorthandoff{>}
+\draw 
+(1.5,2) node[npn](npn){BC548C}
+(0,0.5)  node[ground]{} to [V, l=$V_{BE}$] (0,2) -- (npn.base)
+(1.5,0.5)node[ground]{} -- (npn.emitter) 
+(3,0.5)  node[ground]{} to [V, l_= $V_{CE}$] (3,2.77) -- (npn.collector)
+;\end{circuitikz}
+\caption{Circuito utilizado para la obtención de las curvas de transferencia.}
+\label{circuito:simulacion_transferencia}
+\end{figure}
+
+\subsubsection{Ganancia de corriente entre base y colector}
+
+Para ambas bibliotecas se simuló el circuito de la figura \ref{circuito:simulacion_ganancia} bajo las condiciones de medición del multímetro que se utilizará en las mediciones. Estas son $I_B = 10\unit{\mu A}$ y $V_{CE} = 2,8\unit{V}$. Se obtuvo el parámetro \texttt{BETADC} del \texttt{Simulation Output File}.
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[american]\shorthandoff{>}
+\draw 
+(1.5,2) node[npn](npn){BC548C}
+(0,0.5)  node[ground]{} to [I, l=$I_{B}$] (0,2) -- (npn.base)
+(1.5,0.5)node[ground]{} -- (npn.emitter) 
+(3,0.5)  node[ground]{} to [V, l_= $V_{CE}$] (3,2.77) -- (npn.collector)
+;\end{circuitikz}
+\caption{Circuito utilizado para la obtención de las curvas de salida y de la ganancia de corriente.}
+\label{circuito:simulacion_ganancia_salida}
+\end{figure}
+
+Se obtuvieron los siguientes valores:
+
+\begin{itemize}
+\item{\texttt{PHIL\_BJT}}: $h_{FE} = 460$
+\item{\texttt{SIEMENS}}: $h_{FE} = 432$
+\end{itemize}
+
+\subsubsection{Curva de salida}
+
+Se simuló $I_C$ vs. $V_{CE}$ para $I_{B} = cte$ para ambas bibliotecas. Se varió la tensión $V_{CE}$ entre $0\unit{V}$ y $5\unit{V}$ con pasos de $0,01\unit{V}$, utilizando el circuito simulado en la figura \ref{circuito:simulacion_ganancia_salida}.
+
+La corriente $I_B$ se determinó mediante la ecuación \ref{eq:I_B} para cada valor de $I_C$ deseado, utilizando el parámetro $h_{FE}$ correspondiente al transistor de cada biblioteca. 
+
+\begin{equation}
+I_B = \frac{I_C}{h_{FE}}
+\label{eq:I_B}
+\end{equation}
+
+A continuación se listan los valores de $I_B$ utlizados.
+
+\begin{itemize}
+\item{\texttt{PHIL\_BJT} con $h_{FE} = 460$}
+\begin{itemize}
+\item{$I_C = 5 \unit{mA}$}: $I_B = 10,9\unit{\mu A}$
+\item{$I_C = 25 \unit{mA}$}: $I_B = 54,3\unit{\mu A}$
+\end{itemize}
+\item{\texttt{SIEMENS} con $h_{FE} = 432$}
+\begin{itemize}
+\item{$I_C = 5 \unit{mA}$}: $I_B = 11,6\unit{\mu A}$
+\item{$I_C = 25 \unit{mA}$}: $I_B = 57,9\unit{\mu A}$
+\end{itemize}
+\end{itemize}
+
+\subsection{Obtención de parámetros de las hojas de datos}
+
+\subsection{Obtención de las curvas de forma experimental}
+
+Se obtuvieron las curvas de tres transistores \textbf{TBJ BC548C} distintos utilizando una placa experimental, un regulador de tensión \textbf{LM317} y un \textbf{LM7805}, un potenciómetro lineal de $20\unit{k\Omega}$ y resistencias de valores apropiados para cada medición.
+También se midió para cada transistor el valor de $h_{FE}$ utilizando un muletillero con esta función.
+
+\subsubsection{Curva de transferencia}
+
+Para obtener la curva $i_C$ vs $v_{BE}$ se utilizó el banco de mediciones presentado en la figura \ref{circuito:medicion_transferencia}. El integrado LM317 fija la tensión $V_{CE}=1,25\unit{V}$ y el integrado LM7805 provee una alimentación constante de $5\unit{V}$
+
+\begin{figure}[H] %[h] para here [b] para bottom [t] para top [H]+float para aqui si o si
+\begin{center}
+\includegraphics[scale=0.2]{./imagenes/ic_vbe.jpg}
+\caption{Circuito para la medición de la curva de transferencia $I_D$ vs. $V_{BE}$}
+ \label{circuito:medicion_transferencia}
+\end{center}
+\end{figure}
+
+\subsubsection{Ganancia de corriente entre base y colector}
+
+\subsubsection{Curva de salida}
+
+\subsection{Ajustes realizados}
+
+\subsection{Simulación del modelo modificado}
+
+\section{Análisis y comparación de los resultados}
+
+\subsection{Curvas obtenidas}
+
+\subsection{Comparación de los resultados}
+
+\section{Conclusiones}
 
 \end{document}
-
-
