@@ -166,15 +166,75 @@ También se midió para cada transistor el valor de $h_{FE}$ utilizando un mulet
 
 \subsubsection{Curva de transferencia}
 
-Para obtener la curva $i_C$ vs $v_{BE}$ se utilizó el banco de mediciones presentado en la figura \ref{circuito:medicion_transferencia}. El integrado LM317 fija la tensión $V_{CE}=1,25\unit{V}$ y el integrado LM7805 provee una alimentación constante de $5\unit{V}$
+Para obtener la curva $i_C$ vs $v_{BE}$ se utilizó el banco de mediciones presentado en la figura \ref{circuito:medicion_transferencia}. El regulador de tensión \textbf{LM317} fija la tensión $V_{CE}=1,25\unit{V}$ y el regulador de tensión \textbf{LM7805} provee una alimentación constante de $5\unit{V}$. El potenciómetro utilizado es de $20 \unit{k\Omega}$.
 
 \begin{figure}[H] %[h] para here [b] para bottom [t] para top [H]+float para aqui si o si
 \begin{center}
-\includegraphics[scale=0.2]{./imagenes/ic_vbe.jpg}
+\includegraphics[scale=0.3]{./imagenes/ic_vbe.jpg}
 \caption{Circuito para la medición de la curva de transferencia $I_D$ vs. $V_{BE}$}
  \label{circuito:medicion_transferencia}
 \end{center}
 \end{figure}
+
+Para la obtención de las resistencias $R_{B1}$ y $R_{B1}$ se partió planteando el rango de la corriente $I_C$ deseado y suponiendo $h_{FE} = 200$ se obtuvo el rango de $I_B$.
+
+\[ \displaystyle 0 \unit{mA} \leq I_C \leq 50\unit{mA} \ \ \ \ \ \Longrightarrow \ \ \ \ \  0 \unit{\mu A} \leq I_B \leq 250 \unit{\mu A} \]
+
+Luego se obtuvo el equivalente de Thévenin entre los terminales $a$ y $b$. Para simplificar las ecuaciones se utilizó $R_1 = R_{B1} + R_{B1_{var}}$ y $R_2 = R_{B2} + R_{B2_{var}}$ con $R_{B_{var}} = R_{B1_{var}} + R_{B2_{var}} = 20 \unit{k\Omega}$.
+
+\[ \displaystyle V_{TH} = V_{DD} \frac{R_1}{R_1 + R_2}\ \ \ \ \ \ \ \ \ \ R_{TH} = \frac{R_1\ R_2}{R_1 + R_2}\]
+
+Siendo $V_{DD}$ la salida del regulador de tensión \textbf{LM7805}. 
+
+Del circuito \ref{circuito:medicion_transferencia} obtenemos la ecuación \ref{eq:I_B}
+
+\begin{equation}
+\displaystyle I_B = \frac{V_{TH} - V_{BE_{ON}}}{R_{TH}}
+\label{eq:I_B}
+\end{equation}
+
+Reemplazando la ecuación \ref{eq:I_B} en el rango de valores deseado.
+
+Para el mínimo valor de $I_B$:
+
+\[ \displaystyle \frac{V_{TH} - V_{BE_{ON}}}{R_{TH}} \geq 0 \unit{\mu A} \]
+
+Entonces:
+
+\begin{equation}
+V_{TH} \geq V_{BE_{ON}}
+\label{eq:Vth_baja}
+\end{equation}
+
+Para el máximo valor de $I_B$:
+
+\begin{equation}
+\frac{V_{TH} - V_{BE_{ON}}}{R_{TH}} \leq 250 \unit{\mu A}
+\label{eq:Vth_alta}
+\end{equation}
+
+Con las inecuaciones \ref{eq:Vth_baja} y \ref{eq:Vth_alta} se buscaron valores de $R_{B1}$ y $R_{B2}$ que las cumplam. Teniendo en cuenta que para cada inecuacion los valores de $V_{TH}$ y $R_{TH}$ son distintos ya que dependen de $R_1$ y $R_2$ que varían por estar conectados a un potenciómentro y $0,5 \unit{V} \leq V_{BE_{ON}} \leq 0,7 \unit{V}$.\\
+
+Se propusieron los siguientes valores $R_{B1} = 5\unit{k\Omega}$ y $R_{B2} = 25\unit{k\Omega}$:
+
+\begin{itemize}
+\item{Para $I_B \geq 0 \unit{\mu A}$}: $V_{BE_{ON}} = 0,5 \unit{V}$, $R_1 = R_{B1} = 5 \unit{k\Omega}$ y $R_2 = R_{B2} + 20\unit{k\Omega} = 45 \unit{k\Omega}$
+
+Calculamos el equivalente de Thévenin:
+
+\[ \displaystyle V_{TH} =  0,5 \unit{V} \geq 0,5 \unit{V} = V_{BE_{ON}}\]
+
+\item{Para $I_B \leq 250 \unit{\mu A}$}: $V_{BE_{ON}} = 0,7 \unit{V}$, $R_1 = R_{B1}+ 20\unit{k\Omega} = 25 \unit{k\Omega}$ y $R_2 = R_{B2} = 25 \unit{k\Omega}$
+
+\[ \displaystyle V_{TH} =  2,5 \unit{V} \ \ \ \ \ \ \ \ \ \  R_{TH} = 12,5 \unit{k\Omega}\]
+
+\[ \displaystyle \frac{V_{TH} - V_{BE_{ON}}}{R_{TH}} = \frac{2,5 \unit{V} - 0,7 \unit{V}}{12,5 \unit{k\Omega}} = 144 \unit{\mu A} \leq 250 \unit{\mu A} \]
+
+Entonces el valor maximo medido de $I_C$ será: $I_{C_{MAX}} = I_B\ h_{FE} = 144 \unit{\mu A}\ 200 = 28,8 \unit{mA}$
+
+\end{itemize}
+
+Como se ve los valores $R_{B1}$ y $R_{B2}$ elegidos cumplen las condiciones esperadas.
 
 \subsubsection{Ganancia de corriente entre base y colector}
 
