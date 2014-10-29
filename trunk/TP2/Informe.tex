@@ -109,7 +109,7 @@ Se simuló $I_C$ vs. $V_{BE}$ para $V_{CE} = 1,25 \unit{V}$ para ambas bibliotec
 
 \subsubsection{Ganancia de corriente entre base y colector}
 
-Para ambas bibliotecas se simuló el circuito de la figura \ref{circuito:simulacion_ganancia} bajo las condiciones de medición del multímetro que se utilizará en las mediciones. Estas son $I_B = 10\unit{\mu A}$ y $V_{CE} = 2,8\unit{V}$. Se obtuvo el parámetro \texttt{BETADC} del \texttt{Simulation Output File}.
+Para ambas bibliotecas se simuló el circuito de la figura \ref{circuito:simulacion_ganancia_salida} bajo las condiciones de medición del multímetro que se utilizará en las mediciones. Estas son $I_B = 10\unit{\mu A}$ y $V_{CE} = 2,8\unit{V}$. Se obtuvo el parámetro \texttt{BETADC} del \texttt{Simulation Output File}.
 
 \begin{figure}[H]
 \centering
@@ -180,13 +180,13 @@ Para la obtención de las resistencias $R_{B1}$ y $R_{B2}$ se partió planteando
 
 \[ \displaystyle 0 \unit{mA} \leq I_C \leq 50\unit{mA} \ \ \ \ \ \Longrightarrow \ \ \ \ \  0 \unit{\mu A} \leq I_B \leq 250 \unit{\mu A} \]
 
-Luego se obtuvo el equivalente de Thévenin entre los terminales $a$ y $b$. Para simplificar las ecuaciones se utilizó $R_1 = R_{B1} + R_{B1_{var}}$ y $R_2 = R_{B2} + R_{B2_{var}}$ con $R_{B_{var}} = R_{B1_{var}} + R_{B2_{var}} = 20 \unit{k\Omega}$.
+Luego se obtuvo el equivalente de Thévenin entre los terminales $a$ y $b$. Para simplificar las ecuaciones se utilizó $R_1 = R_{B1} + R_{B1_{var}}$ y $R_2 = R_{B2} + R_{B2_{var}}$ con $R_{B_{var}} = R_{B1_{var}} + R_{B2_{var}} = 20 \unit{k\Omega}$. Siendo $R_{B_{var}}$ el potenciometro de $20 \unit{k\Omega}$.
 
 \[ \displaystyle V_{TH} = V_{DD} \frac{R_1}{R_1 + R_2}\ \ \ \ \ \ \ \ \ \ R_{TH} = \frac{R_1\ R_2}{R_1 + R_2}\]
 
 Siendo $V_{DD}$ la salida del regulador de tensión \textbf{LM7805}. 
 
-Del circuito \ref{circuito:medicion_transferencia} obtenemos la ecuación \ref{eq:I_B}
+Del circuito mostrado en la figura \ref{circuito:medicion_transferencia} obtenemos la ecuación \ref{eq:I_B}
 
 \begin{equation}
 \displaystyle I_B = \frac{V_{TH} - V_{BE_{ON}}}{R_{TH}}
@@ -260,16 +260,62 @@ Para obtener la curva $i_C$ vs $v_{CE}$ se utilizó el banco de mediciones prese
 \end{center}
 \end{figure}
 
-Para la obtención de la resistencia $R_{B1}$ planteamos la ecuación \ref{eq:RB1} obtenida del circuito mostrado en la figura \ref{circuito:medicion_salida}.
+Para la obtención de la resistencia $R_{B1}$ planteamos la ecuación obtenida del circuito mostrado en la figura \ref{circuito:medicion_salida}:
+
+\[ \displaystyle R_{B1} = \frac{V_{DD} - V_{BE_{ON}}}{I_B} \]
+
+
+Y teniendo en cuenta que $I_B = \frac{I_C}{h_{fe}}$ se llegó a la ecuación \ref{eq:RB1}
 
 \begin{equation}
-R_{B1} = \frac{V_{DD} - V_{BE_{ON}}}{I_B}
+R_{B1} = \frac{(V_{DD} - V_{BE_{ON}}) h_{FE}}{I_C}
 \label{eq:RB1}
 \end{equation}
 
-\subsection{Ajustes realizados}
+Siendo $V_{DD} = 5 \unit{V}$ la salida del regulador de tensión  \textbf{LM7805} y $V_{BE_{ON}} = 0,7 \unit{V}$
+
+A continuación listamos los valores de $R_{B1}$ para cada transistor y para cada $I_C$:
+
+\begin{itemize}
+
+\item{Transistor 1:} $h_{FE} = 361$
+
+\begin{itemize}
+\item{Para $I_C = 5 \unit{mA}$}: $R_{B1} \approx 310 \unit{k\Omega}$
+\item{Para $I_C = 25 \unit{mA}$}: $R_{B1} \approx  62\unit{k\Omega}$
+\end{itemize}
+
+\item{Transistor 2:} $h_{FE} = 326$
+
+\begin{itemize}
+\item{Para $I_C = 5 \unit{mA}$}: $R_{B1} \approx  280\unit{k\Omega}$
+\item{Para $I_C = 25 \unit{mA}$}: $R_{B1} \approx  56\unit{k\Omega}$
+\end{itemize}
+
+\item{Transistor 3:} $h_{FE} = 253$
+
+\begin{itemize}
+\item{Para $I_C = 5 \unit{mA}$}: $R_{B1} \approx  217\unit{k\Omega}$
+\item{Para $I_C = 25 \unit{mA}$}: $R_{B1} \approx  43\unit{k\Omega}$
+\end{itemize}
+
+\end{itemize}
+
+\subsection{Obtención de parámetros a partir de las mediciones}
+
+\subsubsection{Parámetros característicos}
+
+\subsubsection{Parámetros de pequeña señal}
+
+
 
 \subsection{Simulación del modelo modificado}
+
+Se diseñó un modelo modificado basado en el modelo de \emph{Spice} del TBJ NPN genérico ajustado a los parámetros característicos del Transistor 1. Realizamos las mismas simulaciones que para las bibliotecas \texttt{PHIL\_BJT} y \texttt{SIEMENS} incluyendo la siguiente directiva:\\
+
+\texttt{.MODEL MiModelo NPN (BF=361 IS=106.239f VAF=86.67009)}\\
+
+Para la simulación de la ganancia de corriente entre base y colector se obtuvo $h_{FE} = 370$
 
 \section{Análisis y comparación de los resultados}
 
