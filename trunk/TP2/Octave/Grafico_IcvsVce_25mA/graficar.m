@@ -70,12 +70,12 @@ plot(V(inicio_v:end),(1/ro2)*V(inicio_v:end)+Ic_sat2,'g-','Linewidth',1)
 plot(V(inicio_v:end),(1/ro3)*V(inicio_v:end)+Ic_sat3,'b-','Linewidth',1)
 
 
-legend(	sprintf('philips ro = %e mA  Va= %e mV Ic(sat) = %f mA', ro4, Va4, Ic_sat4),
-		sprintf('siemens ro = %e mA  Va= %e mV Ic(sat) = %f mA', ro5, Va5, Ic_sat5),
-		sprintf('modelo modificado ro = %e mA  Va= %e mV Ic(sat) = %f mA', ro6, Va6, Ic_sat6),
-		sprintf('transistor 1 ro = %e mA  Va= %e mV Ic(sat) = %f mA', ro1, Va1, Ic_sat1),
-		sprintf('transistor 2 ro = %e mA  Va= %e mV Ic(sat) = %f mA', ro2, Va3, Ic_sat2),
-		sprintf('transistor 3 ro = %e mA  Va= %e mV Ic(sat) = %f mA', ro3, Va2, Ic_sat3),
+legend(	sprintf('philips ro = %e Ohm  Va= %e mV Ic(sat) = %f mA', ro4, Va4, Ic_sat4),
+		sprintf('siemens ro = %e Ohm  Va= %e mV Ic(sat) = %f mA', ro5, Va5, Ic_sat5),
+		sprintf('modelo modificado ro = %e Ohm  Va= %e mV Ic(sat) = %f mA', ro6, Va6, Ic_sat6),
+		sprintf('transistor 1 ro = %e Ohm  Va= %e mV Ic(sat) = %f mA', ro1, Va1, Ic_sat1),
+		sprintf('transistor 2 ro = %e Ohm  Va= %e mV Ic(sat) = %f mA', ro2, Va3, Ic_sat2),
+		sprintf('transistor 3 ro = %e Ohm  Va= %e mV Ic(sat) = %f mA', ro3, Va2, Ic_sat3),
 		'Location','Northoutside')
 
 
@@ -84,6 +84,6 @@ xlabel('Vce [mV]')
 ylabel('Ic [mA]')
 axis([0 5000 20 27])
 grid minor
-print('IcvsVce_25mA.png','-dpng');
+print('IcvsVce_25mA.tex','-depslatexstandalone');
 
 

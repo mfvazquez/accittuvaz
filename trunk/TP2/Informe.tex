@@ -305,9 +305,51 @@ A continuación listamos los valores de $R_{B1}$ para cada transistor y para cad
 
 \subsubsection{Parámetros característicos}
 
-\subsubsection{Parámetros de pequeña señal}
+En las curvas de transferencia $I_C$ vs. $V_{BE}$ medidas y simuladas se obtuvieron los parámetros $I_S$ y $V_{th}$ mediante un ajuste. Se utilizaron dós métodos de ajuste distintos.\\
 
+\textbf{Ajuste exponencial:} Se tomaron los resultados de la expresión
 
+\[ \displaystyle I_C  = I_S\ e^{\frac{V_{BE}}{V_{th}}} \]
+
+y se realizó un ajuste mediante una función exponencial.
+
+\[ \displaystyle y  = A\ e^{B x} \]
+
+\textbf{Ajuste lineal:} Se tomaron los resultados de la expresión
+
+\[ \displaystyle ln(I_C)  = ln(I_S) + \frac{V_{BE}}{V_{th}} \]
+
+y se realizó un ajuste mediante una recta.
+
+\[ \displaystyle y  = A x + B \]
+
+En las curvas de salida $I_C$ vs. $V_{CE}$ medidas y simuladas se obtuvieron los parámetros $I_{C_{sat}}$ y $r_o$ mediante un ajuste lineal, en la región de modo activo directo, a los resultados de la expresión
+
+\[ \displaystyle I_C  = I_{C_{sat}} + \frac{V_{CE}}{r_o} \]
+
+Luego pudo ser calculada la \emph{Tensión de Early} $V_A$ mediante la expresión
+
+\[ \displaystyle V_A = r_o I_{C_{sat}} \]
+
+\subsubsection{Cálculo de parámetros de pequeña señal}
+
+Se calculó y graficó $g_m$ en función de la corriente $I_C$ como
+
+\[ \displaystyle g_m(k) = \frac{I_C(k) - I_C(k-1)}{V_{BE}(k)-V_{BE}(k-1)} \]
+
+Tanto para los transistores simulados como los utilizados en la medición experimental.
+
+Mediante cálculos teóricos, utilizando los parámetros obtenidos en los ajustes, se obtuvo la siguiente ecuación
+
+\[ \displaystyle  g_m = \frac{\displaystyle \partial i_{C}}{\displaystyle \partial v_{BE}}\Bigr\rfloor_Q = \frac{\displaystyle I_S}{\displaystyle V_{th}} e^{\frac{\displaystyle V_{BE}}{\displaystyle V_{th}}} = \frac{\displaystyle I_C}{\displaystyle V_{th}} \]
+
+Para los 3 transistores utilizados en la medición experimental.\\
+
+Finalmente se graficó $r_\pi$ mediante la siguiente ecuación
+
+\[ \displaystyle r_\pi = \frac{h_{FE}}{g_m} \]
+
+Utilizando los distintos todos los $g_m$ obtenidos mediante los dos métodos antes mencionados.
 
 \subsection{Simulación del modelo modificado}
 
@@ -320,6 +362,14 @@ Para la simulación de la ganancia de corriente entre base y colector se obtuvo 
 \section{Análisis y comparación de los resultados}
 
 \subsection{Curvas obtenidas}
+
+\begin{figure}[H] %[h] para here [b] para bottom [t] para top [H]+float para aqui si o si
+\begin{center}
+\includegraphics[scale=0.7]{./Octave/Grafico_IcvsVce_5mA/IcvsVce_5mA.pdf}
+\caption{curva $I_C$ vs $V_{CE}$ $I_C = 25\ \unit{mA}$}
+ \label{fig:curva_Vce_25mA}
+\end{center}
+\end{figure}
 
 \subsection{Comparación de los resultados}
 

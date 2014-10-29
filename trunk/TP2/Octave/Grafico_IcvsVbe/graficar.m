@@ -78,7 +78,7 @@ xlabel('Vbe [mV]')
 ylabel('Ic [mA]')
 axis([510 730 1e-2 4e1])
 grid minor
-print('IdvsVbe_exp.png','-dpng');
+print('IdvsVbe_exp.tex','-depslatexstandalone');
 
 % escala logaritmica
 
@@ -161,7 +161,7 @@ xlabel('Vbe [mV]')
 ylabel('Ic [mA]')
 axis([510 730 1e-2 4e1])
 grid minor
-print('IdvsVbe_recta.png','-dpng');
+print('IdvsVbe_recta.tex','-depslatexstandalone');
 
 
 % GRAFICO DE GM
@@ -210,7 +210,7 @@ axis([0 30 0 0.8])
 xlabel('Ic [mA]')
 ylabel('gm [Ohm^-1]')
 grid minor
-print('gm.png','-dpng');
+print('gm.tex','-depslatexstandalone');
 
 
 
@@ -258,6 +258,6 @@ xlabel('Ic [mA]')
 ylabel('rpi [Ohm]')
 axis([0 4 0 150000])
 grid minor
-print('rpi.png','-dpng');
+print('rpi.tex','-depslatexstandalone');
 
 
