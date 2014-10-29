@@ -1,36 +1,36 @@
-Circuit: * Z:\home\matias\Documentos\DispositivosSemiconductores\TP2\LTspice\tbjsiemenshfe.asc
+Circuit: * Z:\home\matias\Documentos\DispositivosSemiconductores\repo\accittuvaz\TP2\LTspice\tbjsiemenshfe.asc
 
 Direct Newton iteration for .op point succeeded.
 Semiconductor Device Operating Points:
                         --- Bipolar Transistors ---
 Name:       q1
 Model:  bc548c/sie
-Ib:       1.00e-04
-Ic:       3.66e-02
-Vbe:      7.71e-01
-Vbc:     -4.79e-01
-Vce:      1.25e+00
-BetaDC:   3.66e+02
-Gm:       1.21e+00
-Rpi:      2.59e+02
+Ib:       1.00e-05
+Ic:       4.32e-03
+Vbe:      6.76e-01
+Vbc:     -2.12e+00
+Vce:      2.80e+00
+BetaDC:   4.32e+02
+Gm:       1.64e-01
+Rpi:      2.60e+03
 Rx:       2.65e+01
-Ro:       2.44e+03
-Cbe:      1.23e-09
-Cbc:      4.00e-12
+Ro:       2.11e+04
+Cbe:      1.50e-10
+Cbc:      2.75e-12
 Cjs:      0.00e+00
-BetaAC:   3.14e+02
+BetaAC:   4.27e+02
 Cbx:      0.00e+00
-Ft:       1.57e+08
+Ft:       1.71e+08
 
 
 
-Date: Sat Oct 25 22:18:23 2014
-Total elapsed time: 0.022 seconds.
+Date: Wed Oct 29 00:00:16 2014
+Total elapsed time: 0.042 seconds.
 
 tnom = 27
 temp = 27
 method = trap
-totiter = 5
+totiter = 6
 traniter = 0
 tranpoints = 0
 accept = 0

@@ -82,7 +82,7 @@ legend(	sprintf('philips ro = %e mA  Va= %e mV Ic(sat) = %f mA', ro4, Va4, Ic_sa
 
 xlabel('Vce [mV]')
 ylabel('Ic [mA]')
-axis([0 5000 20 30])
+axis([0 5000 20 27])
 grid minor
 print('IcvsVce_25mA.png','-dpng');
 
