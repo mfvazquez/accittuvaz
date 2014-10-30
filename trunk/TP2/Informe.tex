@@ -435,6 +435,28 @@ Para la simulación de la ganancia de corriente entre base y colector se obtuvo 
 
 \subsection{Comparación de los resultados}
 
+\begin{table}[H]
+\centering
+\begin{tabular}{c|c|c|c|c|l}
+\cline{2-5}
+& $X$ & \texttt{PHIL\_BJT} & \texttt{SIEMENS} & modelo modificado \\ 
+\cline{2-5}
+& $\displaystyle \abs{\frac{k_{X} - k_{modelo\ modificado}}{k_{modelo\ modificado}}} \ 100 \%$  & $\%$ & $\%$ & $\%$ &\\ 
+\cline{1-5}
+\multicolumn{1}{ |c  }{\multirow{2}{*}{$I_{D_{SAT}} \simeq 0,5 \unit{mA}$} } & \multicolumn{1}{ |c| }{ $\displaystyle \abs{\frac{r_{o_{X}} - r_{o_{modelo\ modificado}}}{r_{o_{modelo\ modificado}}}} \ 100 \%$} & $\%$ & $\%$ & $\%$ &   \\ 
+\cline{2-5}
+\multicolumn{1}{ |c  }{}                        & \multicolumn{1}{ |c| }{$ \displaystyle \abs{\frac{\lambda_{X} - \lambda_{modelo\ modificado}}{\lambda_{modelo\ modificado}}} \ 100 \%$} & $\%$ & $\%$ & $\%$ &   \\ 
+\cline{1-5}
+\multicolumn{1}{ |c  }{\multirow{2}{*}{$I_{D_{SAT}} \simeq 2,5 \unit{mA}$} } & \multicolumn{1}{ |c| }{ $\displaystyle \abs{\frac{r_{o_{X}} - r_{o_{modelo\ modificado}}}{r_{o_{modelo\ modificado}}}} \ 100 \%$} & $\%$ & $\%$ & $\%$ & \\ 
+\cline{2-5}
+\multicolumn{1}{ |c  }{}                        & \multicolumn{1}{ |c| }{$ \displaystyle \abs{\frac{\lambda_{X} - \lambda_{modelo\ modificado}}{\lambda_{modelo\ modificado}}} \ 100 \%$} & $\%$ & $\%$ & $\%$ &\\ 
+\cline{1-5}
+\end{tabular}
+\caption{Comparación de los parámetros principales respecto al modelo modificado}
+\label{table:comparacion}
+\end{table}
+
+
 \section{Conclusiones}
 
 \end{document}
