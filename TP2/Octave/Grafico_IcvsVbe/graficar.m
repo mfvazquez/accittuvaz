@@ -53,25 +53,25 @@ V=500:1:800;
 figure
 hold on
 
-semilogy(Simulacion1(:,1),Simulacion1(:,2),'m-','Linewidth',3)
-semilogy(Simulacion2(:,1),Simulacion2(:,2),'y-','Linewidth',3)
-semilogy(Simulacion3(:,1),Simulacion3(:,2),'k-','Linewidth',3)
+%semilogy(Simulacion1(:,1),Simulacion1(:,2),'m-','Linewidth',3)
+%semilogy(Simulacion2(:,1),Simulacion2(:,2),'y-','Linewidth',3)
+%semilogy(Simulacion3(:,1),Simulacion3(:,2),'k-','Linewidth',3)
 
-semilogy(Medicion1(:,1),Medicion1(:,2),'ro','Markersize',6)
+%semilogy(Medicion1(:,1),Medicion1(:,2),'ro','Markersize',6)
 semilogy(Medicion2(:,1),Medicion2(:,2),'go','Markersize',6)
-semilogy(Medicion3(:,1),Medicion3(:,2),'bo','Markersize',6)
+%semilogy(Medicion3(:,1),Medicion3(:,2),'bo','Markersize',6)
 
-semilogy(V(1:230),Is1*exp(V(1:230)/Vth1),'r-','Linewidth',1)
+%semilogy(V(1:230),Is1*exp(V(1:230)/Vth1),'r-','Linewidth',1)
 semilogy(V(1:230),Is2*exp(V(1:230)/Vth2),'g-','Linewidth',1)
-semilogy(V(1:230),Is3*exp(V(1:230)/Vth3),'b-','Linewidth',1)
+%semilogy(V(1:230),Is3*exp(V(1:230)/Vth3),'b-','Linewidth',1)
 
 
-legend(	sprintf('philips Is = %e mA  Vth= %e mV', Is4, Vth4),
-		sprintf('siemens Is = %e mA  Vth= %e mV', Is5, Vth5),
-		sprintf('modelo propio Is = %e mA Vth = %e mV', Is6, Vth6),
-		sprintf('transistor 1 Is = %e mA  Vth= %e mV', Is1, Vth1),
+legend(	%sprintf('philips Is = %e mA  Vth= %e mV', Is4, Vth4),
+		%sprintf('siemens Is = %e mA  Vth= %e mV', Is5, Vth5),
+		%sprintf('modelo propio Is = %e mA Vth = %e mV', Is6, Vth6),
+		%sprintf('transistor 1 Is = %e mA  Vth= %e mV', Is1, Vth1),
 		sprintf('transistor 2 Is = %e mA  Vth= %e mV', Is2, Vth2),
-		sprintf('transistor 3 Is = %e mA  Vth= %e mV', Is3, Vth3),
+		%sprintf('transistor 3 Is = %e mA  Vth= %e mV', Is3, Vth3),
 	   'Location','Northoutside')
 
 xlabel('Vbe [mV]')
@@ -136,25 +136,25 @@ figure
 hold on
 
 
-semilogy(Simulacion1(:,1),Simulacion1(:,2),'m-','Linewidth',3)
-semilogy(Simulacion2(:,1),Simulacion2(:,2),'y-','Linewidth',3)
-semilogy(Simulacion3(:,1),Simulacion3(:,2),'k-','Linewidth',3)
-semilogy(Medicion1(:,1),Medicion1(:,2),'ro','Markersize',6)
+%semilogy(Simulacion1(:,1),Simulacion1(:,2),'m-','Linewidth',3)
+%semilogy(Simulacion2(:,1),Simulacion2(:,2),'y-','Linewidth',3)
+%semilogy(Simulacion3(:,1),Simulacion3(:,2),'k-','Linewidth',3)
+%semilogy(Medicion1(:,1),Medicion1(:,2),'ro','Markersize',6)
 semilogy(Medicion2(:,1),Medicion2(:,2),'go','Markersize',6)
-semilogy(Medicion3(:,1),Medicion3(:,2),'bo','Markersize',6)
+%semilogy(Medicion3(:,1),Medicion3(:,2),'bo','Markersize',6)
 
 
-semilogy(V(1:230),Is1*exp(V(1:230)/Vth1),'r-','Linewidth',1)
+%semilogy(V(1:230),Is1*exp(V(1:230)/Vth1),'r-','Linewidth',1)
 semilogy(V(1:230),Is2*exp(V(1:230)/Vth2),'g-','Linewidth',1)
-semilogy(V(1:230),Is3*exp(V(1:230)/Vth3),'b-','Linewidth',1)
+%semilogy(V(1:230),Is3*exp(V(1:230)/Vth3),'b-','Linewidth',1)
 
 
-legend(	sprintf('philips Is = %e mA  Vth= %e mV', Is4, Vth4),
-		sprintf('siemens Is = %e mA  Vth= %e mV', Is5, Vth5),
+legend(	%sprintf('philips Is = %e mA  Vth= %e mV', Is4, Vth4),
+		%sprintf('siemens Is = %e mA  Vth= %e mV', Is5, Vth5),
 		sprintf('modelo modificado Is = %e mA  Vth= %e mV', Is6, Vth6),
-		sprintf('transistor 1 Is = %e mA  Vth= %e mV', Is1, Vth1),
-		sprintf('transistor 2 Is = %e mA  Vth= %e mV', Is2, Vth2),
-		sprintf('transistor 3 Is = %e mA  Vth= %e mV', Is3, Vth3),
+		%sprintf('transistor 1 Is = %e mA  Vth= %e mV', Is1, Vth1),
+	%	sprintf('transistor 2 Is = %e mA  Vth= %e mV', Is2, Vth2),
+%		sprintf('transistor 3 Is = %e mA  Vth= %e mV', Is3, Vth3),
 	   'Location','Northoutside')
 
 xlabel('Vbe [mV]')
