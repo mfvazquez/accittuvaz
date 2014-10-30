@@ -85,3 +85,11 @@ axis([0 5000 4.1 5.3])
 grid minor
 print('IcvsVce_5mA.tex','-depslatexstandalone');
 
+error_ro4 = ((ro4 - ro1)/ro1) * 100
+error_ro5 = ((ro5 - ro1)/ro1) * 100
+error_ro6 = ((ro6 - ro1)/ro1) * 100
+
+erVar_Va4 = ((Va4 - Va1)/Va1) * 100
+erVar_Va5 = ((Va5 - Va1)/Va1) * 100
+erVar_Va6 = ((Va6 - Va1)/Va1) * 100
+
