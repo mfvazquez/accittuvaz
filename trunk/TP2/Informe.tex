@@ -78,21 +78,30 @@
 \maketitle
 
 \begin{abstract} %Resumen
-\emph{En el siguiente trabajo se analizan las principales características de polarización y frecuencias medias de transistores TBJ tipo NPN. Estudiando las curvas de transferencia y de salida, obtenidas en mediciones, se consiguen los parámetros característicos y se calculan los parámetros de pequeña señal. Finalmente se realiza un modelo básico de Spice con los parámetros calculados y se presentan simulaciones para contrastar con las mediciones.}
+\emph{En el siguiente trabajo se analizan las principales características 
+de polarización y frecuencias medias de transistores TBJ tipo NPN. 
+Estudiando las curvas de transferencia y de salida, obtenidas en mediciones, 
+se consiguen los parámetros característicos y se calculan los parámetros 
+de pequeña señal. Finalmente se realiza un modelo básico de Spice con los 
+parámetros calculados y se presentan simulaciones para contrastar con las mediciones.}
 \end{abstract}
 
 \section{Desarrollo}
 
-A continuación se detalla el desarrollo del trabajo realizado, tanto la realización de las simulaciones mediantes \emph{Spice}, como las mediciones realizadas.
+A continuación se detalla el desarrollo del trabajo realizado, tanto la 
+realización de las simulaciones mediantes \emph{Spice}, como las mediciones realizadas.
 
 \subsection{Simulación de transistores BC548C}
 
-En primera instancia se obtuvieron con \emph{LTSPICE} las curvas de transferencia, la ganancia de corriente entre base y colector y las curvas de salida  propias al transistor. Usando las bibliotecas  
+En primera instancia se obtuvieron con \emph{LTSPICE} las curvas de transferencia, 
+la ganancia de corriente entre base y colector y las curvas de salida  propias al transistor. Usando las bibliotecas  
  \texttt{PHIL\_BJT} y \texttt{SIEMENS} proporcionadas por la cátedra.
 
 \subsubsection{Curva de transferencia}
 
-Se simuló $I_C$ vs. $V_{BE}$ para $V_{CE} = 1,25 \unit{V}$ para ambas bibliotecas. Se varió la tensión $V_{BE}$ entre $0\unit{V}$ y $0,9\unit{V}$ con pasos de $0,01\unit{V}$, utilizando el circuito simulado en la figura \ref{circuito:simulacion_transferencia}.
+Se simuló $I_C$ vs. $V_{BE}$ para $V_{CE} = 1,25 \unit{V}$ para ambas 
+bibliotecas. Se varió la tensión $V_{BE}$ entre $0\unit{V}$ y $0,9\unit{V}$ 
+con pasos de $0,01\unit{V}$, utilizando el circuito simulado en la figura \ref{circuito:simulacion_transferencia}.
 
 \begin{figure}[H]
 \centering
@@ -103,13 +112,15 @@ Se simuló $I_C$ vs. $V_{BE}$ para $V_{CE} = 1,25 \unit{V}$ para ambas bibliotec
 (1.5,0.5)node[ground]{} -- (npn.emitter) 
 (3,0.5)  node[ground]{} to [V, l_= $V_{CE}$] (3,2.77) -- (npn.collector)
 ;\end{circuitikz}
-\caption{Circuito utilizado para la obtención de las curvas de transferencia.}
+\caption{Circuito utilizado para la simulación de las curvas de transferencia.}
 \label{circuito:simulacion_transferencia}
 \end{figure}
 
 \subsubsection{Ganancia de corriente entre base y colector}
 
-Para ambas bibliotecas se simuló el circuito de la figura \ref{circuito:simulacion_ganancia_salida} bajo las condiciones de medición del multímetro que se utilizará en las mediciones. Estas son $I_B = 10\unit{\mu A}$ y $V_{CE} = 2,8\unit{V}$. Se obtuvo el parámetro \texttt{BETADC} del \texttt{Simulation Output File}.
+Para ambas bibliotecas se simuló el circuito de la figura \ref{circuito:simulacion_ganancia_salida} 
+bajo las condiciones de medición del multímetro que se utilizará en las mediciones. 
+Estas son $I_B = 10\unit{\mu A}$ y $V_{CE} = 2,8\unit{V}$. Se obtuvo el parámetro \texttt{BETADC} del \texttt{Simulation Output File}.
 
 \begin{figure}[H]
 \centering
@@ -120,7 +131,7 @@ Para ambas bibliotecas se simuló el circuito de la figura \ref{circuito:simulac
 (1.5,0.5)node[ground]{} -- (npn.emitter) 
 (3,0.5)  node[ground]{} to [V, l_= $V_{CE}$] (3,2.77) -- (npn.collector)
 ;\end{circuitikz}
-\caption{Circuito utilizado para la obtención de las curvas de salida y de la ganancia de corriente.}
+\caption{Circuito utilizado para la simulación de las curvas de salida y de la ganancia de corriente.}
 \label{circuito:simulacion_ganancia_salida}
 \end{figure}
 
@@ -133,9 +144,12 @@ Se obtuvieron los siguientes valores:
 
 \subsubsection{Curva de salida}
 
-Se simuló $I_C$ vs. $V_{CE}$ para $I_{B} = cte$ para ambas bibliotecas. Se varió la tensión $V_{CE}$ entre $0\unit{V}$ y $5\unit{V}$ con pasos de $0,01\unit{V}$, utilizando el circuito simulado en la figura \ref{circuito:simulacion_ganancia_salida}.
+Se simuló $I_C$ vs. $V_{CE}$ para $I_{B} = cte$ para ambas bibliotecas. Se varió la 
+tensión $V_{CE}$ entre $0\unit{V}$ y $5\unit{V}$ con pasos de $0,01\unit{V}$, 
+utilizando el circuito simulado en la figura \ref{circuito:simulacion_ganancia_salida}.
 
-La corriente $I_B$ se determinó mediante la ecuación \ref{eq:I_B} para cada valor de $I_C$ deseado, utilizando el parámetro $h_{FE}$ correspondiente al transistor de cada biblioteca. 
+La corriente $I_B$ se determinó mediante la ecuación \ref{eq:I_B} para cada valor 
+de $I_C$ deseado, utilizando el parámetro $h_{FE}$ correspondiente al transistor de cada biblioteca. 
 
 \begin{equation}
 I_B = \frac{I_C}{h_{FE}}
@@ -183,12 +197,18 @@ De la hoja de datos de Siemens se obtuvieron los siguientes valores:
 
 \subsection{Obtención de las curvas de forma experimental}
 
-Se obtuvieron las curvas de tres transistores \textbf{TBJ BC548C} distintos utilizando una placa experimental, un regulador de tensión \textbf{LM317} y un \textbf{LM7805}, un potenciómetro lineal de $20\unit{k\Omega}$ y resistencias de valores apropiados para cada medición.
-También se midió para cada transistor el valor de $h_{FE}$ utilizando un muletillero con esta función.
+Se obtuvieron las curvas de tres transistores \textbf{TBJ BC548C} distintos 
+utilizando una placa experimental, reguladores de tensión \textbf{LM317} y 
+ \textbf{LM7805}, un potenciómetro lineal de $20\unit{k\Omega}$ y resistencias de valores apropiados para cada medición.
+También se midió para cada transistor el valor de $h_{FE}$ utilizando un multímetro con esta función.
 
 \subsubsection{Curva de transferencia}
 
-Para obtener la curva $i_C$ vs $v_{BE}$ se utilizó el banco de mediciones presentado en la figura \ref{circuito:medicion_transferencia}. El regulador de tensión \textbf{LM317} fija la tensión $V_{CE}=1,25\unit{V}$ y el regulador de tensión \textbf{LM7805} provee una alimentación constante de $5\unit{V}$. El potenciómetro utilizado es de $20 \unit{k\Omega}$.
+Para obtener la curva $I_C$ vs $V_{BE}$ se utilizó el banco de mediciones 
+presentado en la figura \ref{circuito:medicion_transferencia}. El regulador de 
+tensión \textbf{LM317} fija la tensión $V_{CE}=1,25\unit{V}$ y el regulador de 
+tensión \textbf{LM7805} provee una alimentación constante de $5\unit{V}$. 
+El potenciómetro utilizado es de $20 \unit{k\Omega}$.
 
 \begin{figure}[H] %[h] para here [b] para bottom [t] para top [H]+float para aqui si o si
 \begin{center}
@@ -198,17 +218,23 @@ Para obtener la curva $i_C$ vs $v_{BE}$ se utilizó el banco de mediciones prese
 \end{center}
 \end{figure}
 
-Para la obtención de las resistencias $R_{B1}$ y $R_{B2}$ se partió planteando el rango de la corriente $I_C$ deseado y suponiendo $h_{FE} = 200$ se obtuvo el rango de $I_B$.
+Para la obtención de las resistencias $R_{B1}$ y $R_{B2}$ se partió 
+planteando el rango de la corriente $I_C$ deseado y suponiendo $h_{FE} = 200$ 
+se obtuvo el rango de $I_B$.
 
 \[ \displaystyle 0 \unit{mA} \leq I_C \leq 50\unit{mA} \ \ \ \ \ \Longrightarrow \ \ \ \ \  0 \unit{\mu A} \leq I_B \leq 250 \unit{\mu A} \]
 
-Luego se obtuvo el equivalente de Thévenin entre los terminales $a$ y $b$. Para simplificar las ecuaciones se utilizó $R_1 = R_{B1} + R_{B1_{var}}$ y $R_2 = R_{B2} + R_{B2_{var}}$ con $R_{B_{var}} = R_{B1_{var}} + R_{B2_{var}} = 20 \unit{k\Omega}$. Siendo $R_{B_{var}}$ el potenciometro de $20 \unit{k\Omega}$.
+Luego se obtuvo el equivalente de Thévenin entre los terminales $a$ y $b$. 
+Para simplificar las ecuaciones se utilizó $R_1 = R_{B1} + R_{B1_{var}}$ y 
+$R_2 = R_{B2} + R_{B2_{var}}$ con $R_{B_{var}} = R_{B1_{var}} + R_{B2_{var}} = 20 \unit{k\Omega}$. 
+Siendo $R_{B_{var}}$ el potenciometro de $20 \unit{k\Omega}$.
 
 \[ \displaystyle V_{TH} = V_{DD} \frac{R_1}{R_1 + R_2}\ \ \ \ \ \ \ \ \ \ R_{TH} = \frac{R_1\ R_2}{R_1 + R_2}\]
 
 Siendo $V_{DD}$ la salida del regulador de tensión \textbf{LM7805}. 
 
-Del circuito mostrado en la figura \ref{circuito:medicion_transferencia} obtenemos la ecuación \ref{eq:I_B}
+Del circuito mostrado en la figura \ref{circuito:medicion_transferencia} 
+obtenemos la ecuación \ref{eq:I_B}
 
 \begin{equation}
 \displaystyle I_B = \frac{V_{TH} - V_{BE_{ON}}}{R_{TH}}
@@ -235,7 +261,11 @@ Para el máximo valor de $I_B$:
 \label{eq:Vth_alta}
 \end{equation}
 
-Con las inecuaciones \ref{eq:Vth_baja} y \ref{eq:Vth_alta} se buscaron valores de $R_{B1}$ y $R_{B2}$ que las cumplan. Teniendo en cuenta que para cada inecuación los valores de $V_{TH}$ y $R_{TH}$ son distintos ya que dependen de $R_1$ y $R_2$ que varían por estar conectados a un potenciómetro y $0,5 \unit{V} \leq V_{BE_{ON}} \leq 0,7 \unit{V}$.\\
+Con las inecuaciones \ref{eq:Vth_baja} y \ref{eq:Vth_alta} se buscaron 
+valores de $R_{B1}$ y $R_{B2}$ que las cumplan. Teniendo en cuenta que 
+para cada inecuación los valores de $V_{TH}$ y $R_{TH}$ son distintos ya 
+que dependen de $R_1$ y $R_2$ que varían por estar conectados a un 
+potenciómetro y $0,5 \unit{V} \leq V_{BE_{ON}} \leq 0,7 \unit{V}$.\\
 
 Se propusieron los siguientes valores $R_{B1} = 5\unit{k\Omega}$ y $R_{B2} = 25\unit{k\Omega}$:
 
@@ -260,7 +290,8 @@ Como se ve los valores $R_{B1}$ y $R_{B2}$ elegidos cumplen las condiciones espe
 
 \subsubsection{Ganancia de corriente entre base y colector}
 
-Para obtener $h_{FE}$ se utilizó un multímetro que realiza la medición bajo las condiciones $I_B = 10 \unit{\mu A}$ y $V_{CE} = 2,8 \unit{V}$
+Para obtener $h_{FE}$ se utilizó un multímetro que realiza la medición 
+bajo las condiciones $I_B = 10 \unit{\mu A}$ y $V_{CE} = 2,8 \unit{V}$
 
 Se obtuvieron los siguientes valores para cada transistor:
 
@@ -272,7 +303,10 @@ Se obtuvieron los siguientes valores para cada transistor:
 
 \subsubsection{Curva de salida}
 
-Para obtener la curva $i_C$ vs $v_{CE}$ se utilizó el banco de mediciones presentado en la figura \ref{circuito:medicion_salida}.El regulador de tensión \textbf{LM7805} provee una alimentación constante de $5\unit{V}$. El potenciómetro utilizado es de $20 \unit{k\Omega}$.
+Para obtener la curva $i_C$ vs $v_{CE}$ se utilizó el banco de mediciones 
+presentado en la figura \ref{circuito:medicion_salida}.El regulador de 
+tensión \textbf{LM7805} provee una alimentación constante de $5\unit{V}$. 
+El potenciómetro utilizado es de $20 \unit{k\Omega}$.
 
 \begin{figure}[H] %[h] para here [b] para bottom [t] para top [H]+float para aqui si o si
 \begin{center}
@@ -282,7 +316,8 @@ Para obtener la curva $i_C$ vs $v_{CE}$ se utilizó el banco de mediciones prese
 \end{center}
 \end{figure}
 
-Para la obtención de la resistencia $R_{B1}$ planteamos la ecuación obtenida del circuito mostrado en la figura \ref{circuito:medicion_salida}:
+Para la obtención de la resistencia $R_{B1}$ planteamos la ecuación obtenida 
+del circuito mostrado en la figura \ref{circuito:medicion_salida}:
 
 \[ \displaystyle R_{B1} = \frac{V_{DD} - V_{BE_{ON}}}{I_B} \]
 
@@ -327,7 +362,9 @@ A continuación listamos los valores de $R_{B1}$ para cada transistor y para cad
 
 \subsubsection{Parámetros característicos}
 
-En las curvas de transferencia $I_C$ vs. $V_{BE}$ medidas y simuladas se obtuvieron los parámetros $I_S$ y $V_{th}$ mediante un ajuste. Se utilizaron dos métodos de ajuste distintos.\\
+En las curvas de transferencia $I_C$ vs. $V_{BE}$ medidas y simuladas se 
+obtuvieron los parámetros $I_S$ y $V_{th}$ mediante un ajuste. Se utilizaron 
+dos métodos de ajuste distintos.\\
 
 \textbf{Ajuste exponencial:} Se tomaron los resultados de la expresión
 
@@ -345,7 +382,9 @@ y se realizó un ajuste mediante una recta.
 
 \[ \displaystyle y  = A x + B \]
 
-En las curvas de salida $I_C$ vs. $V_{CE}$ medidas y simuladas se obtuvieron los parámetros $I_{C_{sat}}$ y $r_o$ mediante un ajuste lineal, en la región de modo activo directo, a los resultados de la expresión
+En las curvas de salida $I_C$ vs. $V_{CE}$ medidas y simuladas se obtuvieron 
+los parámetros $I_{C_{sat}}$ y $r_o$ mediante un ajuste lineal, en la región 
+de modo activo directo, a los resultados de la expresión
 
 \[ \displaystyle I_C  = I_{C_{sat}} + \frac{V_{CE}}{r_o} \]
 
@@ -371,11 +410,15 @@ Finalmente se graficó $r_\pi$ mediante la siguiente ecuación
 
 \[ \displaystyle r_\pi = \frac{h_{FE}}{g_m} \]
 
-Utilizando los distintos todos los $g_m$ obtenidos mediante los dos métodos antes mencionados.
+Utilizando los distintos todos los $g_m$ obtenidos mediante los dos métodos 
+antes mencionados.
 
 \subsection{Simulación del modelo modificado}
 
-Se diseñó un modelo modificado basado en el modelo de \emph{Spice} del TBJ NPN genérico ajustado a los parámetros característicos del Transistor 1. Realizamos las mismas simulaciones que para las bibliotecas \texttt{PHIL\_BJT} y \texttt{SIEMENS} incluyendo la siguiente directiva:\\
+Se diseñó un modelo modificado basado en el modelo de \emph{Spice} del 
+TBJ NPN genérico ajustado a los parámetros característicos del Transistor 1. 
+Realizamos las mismas simulaciones que para las bibliotecas \texttt{PHIL\_BJT} 
+y \texttt{SIEMENS} incluyendo la siguiente directiva:\\
 
 \texttt{.MODEL MiModelo NPN (BF=361 IS=106.239f VAF=86.67009)}\\
 
@@ -456,7 +499,7 @@ $\abs{\frac{I_{S_{exp}} - I_{S_{lineal}}}{I_{S_{exp}}}}\ 100 \%$ & $ 16,4\%$ & $
 $\abs{\frac{V_{th_{exp}} - V_{th_{lineal}}}{V_{th_{exp}}}}\ 100 \%$ & $0,8 \%$ & $1,8 \%$ & $0,3 \%$ & $1,6 \%$ & $5,1 \%$ & $1,2 \%$\\
 \hline
 \end{tabular}
-\caption{Comparación de entre los dos métodos de ajuste}
+\caption{Comparación entre los dos métodos de ajuste}
 \label{table:comparacion_ajuste}
 \end{table}
 
@@ -499,31 +542,31 @@ fue diseñado con sus parámetros principales.
 
 En las curvas de salida se encontró que para los transistores utilizados
 en las mediciones experimentales el parámetro $V_A$ varía respecto a la
-corriente de saturación en el colector $I_{C_{sat}}$. Esto no ocurre en
+corriente a la que satura el colector $I_{C_{MAD}}$. Esto no ocurre en
 los transistores simulados en \emph{Spice}.\\
-También como se puede observar en la figura \ref{fig:salida_5ma} todos
-los transistores saturan aproximadamente a la misma tensión $V_{CE_{sat}} \approx 300\unit{mV}$
+También como se puede observar en la figura \ref{fig:salida_5ma} en todos
+los transistores la corriente $I_C$ satura aproximadamente a la misma tensión $V_{CE} \approx 300\unit{mV}$
 como fué indicado en las hojas de datos.
-Esto no ocurre para $I_{C_{sat}} \approx 25 \unit{mA}$, como se puede observar
-en la figura \ref{fig:salida_25ma}, en donde los transistores
-simulados saturan a $V_{CE_{sat}} \approx 300\unit{mV}$ y los transistores
-medidos saturan a $V_{CE_{sat}} \approx 1400\unit{mV}$.
+Esto no ocurre para $I_{C_{MAD}} \approx 25 \unit{mA}$, como se puede observar
+en la figura \ref{fig:salida_25ma}, en donde la corriente de los transistores
+simulados satura a $V_{CE} \approx 300\unit{mV}$ y la corriente de los transistores
+medidos satura a $V_{CE} \approx 1400\unit{mV}$.
 
-\section{Conclusiones}
+\section{Conclusión}
 
 Entre los distintos métodos de ajuste, para las curvas de transferencia,
 podemos concluir que el parámetro $I_S$ no tiene mucha influencia en la curva.
 Ya que a pesar de tener diferencias importantes entre distintos métodos
 de ajustes las curvas son muy similares.
-Tampoco hubo diferencias importantes entre los valores de $V_{th}$ tanto 
+No hubo diferencias importantes entre los valores de $V_{th}$ tanto 
 para los transistores usados en las mediciones experimentales como en los 
 simulados. Esto corroboró que $V_{th}$ depende de la temperatura ya que
 $V_{th} = \frac{K\ T}{q}$ y al estar los transistores aproximadamente
 a la misma temperatura los valores obtenidos fueron similares.
 
-Se encontraron mas diferencias entre las curvas simuladas con las
-obtenidas experimentalmente para $I_{C_{sat}} \approx 25 \unit{mA}$ que para
-$I_{C_{sat}} \approx 5 \unit{mA}$. Con lo que se puede concluir que
+Se encontraron más diferencias entre las curvas simuladas con las
+obtenidas experimentalmente para $I_{C_{MAD}} \approx 25 \unit{mA}$ que para
+$I_{C_{MAD}} \approx 5 \unit{mA}$. Con lo que se puede concluir que
 a mayores valores de $I_{C}$ los datos experimentales varían respecto
 a los valores obtenidos mediante las simulaciones en \emph{Spice} y los
 datos obtenidos de las hojas de datos.
@@ -531,10 +574,15 @@ datos obtenidos de las hojas de datos.
 Respecto a la transconductancia $g_m$ se pudo observar en los gráficos
 que a medida que $I_C$ auenta el valor teórico difiere del experimental.
 
-Finalmente destacamos la importancia del parámetro $h_{FE}$ en los transistores
-TBJ ya que tienen valores muy diversos para transistores del mismo modelo.
+
+Finalmente destacamos que a partir de lo observado no es posible diseñar 
+precisamente un circuito a partir de la información proveniente de las hojas de datos
+dado que el parámetro $h_{FE}$ en los transistores
+TBJ tiene valores muy diversos para transistores del mismo modelo.
 Esto se debe a que es difícil de controlar en el proceso de fabricación.
-Es importante considerarlo ya que para  conseguir los mismos resultados con distintos transistores se debe modificar el circuito al que se encuentra conectado. De la misma
-forma  para distintos transistores se debió utilizar distintas resistencias para obtener la misma corriente de saturación.
+Es importante considerarlo ya que para  conseguir los mismos resultados con 
+distintos transistores se debe modificar el circuito al que se encuentra conectado. 
+Por esta misma razón para distintos transistores se debió utilizar distintas resistencias para 
+obtener la misma corriente de saturación durante las mediciones experimentales.
 
 \end{document}
