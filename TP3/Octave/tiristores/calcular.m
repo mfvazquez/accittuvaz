@@ -32,7 +32,7 @@ axis([-0.0004 0.0025 -0.2 0.35])
 grid minor
 legend('Corriente en el inductor sin diodo y con disparo corto','Location','Northoutside')
 
-print('V_L_sin_diodo_disparo_corto.png','-dpng');
+print('I_L_sin_diodo_disparo_corto.png','-dpng');
 
 
 
@@ -66,7 +66,7 @@ axis([-0.0002 0.0045 -0.28 0.25])
 grid minor
 legend('Corriente en el inductor con diodo y con disparo corto','Location','Northoutside')
 
-print('V_L_con_diodo_disparo_corto.png','-dpng');
+print('I_L_con_diodo_disparo_corto.png','-dpng');
 
 # ---------------- CON DIODO Y CON DISPARO LARGO ----------------------
 
@@ -98,4 +98,4 @@ axis([-0.0004 0.022 -0.27 0.24])
 grid minor
 legend('Corriente en el inductor con diodo y con disparo largo','Location','Northoutside')
 
-print('V_L_con_diodo_disparo_largo.png','-dpng');
+print('I_L_con_diodo_disparo_largo.png','-dpng');
