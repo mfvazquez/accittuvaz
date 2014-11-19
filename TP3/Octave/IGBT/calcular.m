@@ -43,14 +43,37 @@ print('tension_Vr.png','-dpng');
 Ig18 = Vr18 / 18;
 dV18 = diff(Vg18)./diff(tiempo18);
 C18 = Ig18(1:end-1) ./dV18;
-C18(~isfinite(C18))= 0; # valores inf y nan igual a cero
+#C18(~isfinite(C18))= 0; # valores inf y nan igual a cero
 C18_max = max(C18)
+
 
 Ig1k = Vr1k / 1e3;
 dV1k = diff(Vg1k)./diff(tiempo1k);
 C1k = Ig1k(1:end-1) ./dV1k;
 C1k(~isfinite(C1k))= 0; # valores inf y nan igual a cero
 C1k_max = max(C1k)
+
+
+figure
+hold on
+plot(tiempo18(1:end-1),C18,'b-','Linewidth',1)
+legend('Capacidad con Rg = 18',
+	   'Location','Northoutside')
+xlabel('Tiempo [seg.]')
+ylabel('Capacidad [F]')
+grid minor
+print('capacidad18.png','-dpng');
+
+figure
+hold on
+plot(tiempo18,Vg18,'b-','Linewidth',1)
+legend('Vg con Rg = 18',
+	   'Location','Northoutside')
+xlabel('Tiempo [seg.]')
+ylabel('Tension [V]')
+grid minor
+print('Vg18.png','-dpng');
+
 
 
 #------------- CORRIENTE DEL IGBT Y POTENCIA SIN L -------------------------
@@ -67,7 +90,6 @@ hold on
 plot(tiempo, Ie, 'r-', 'Linewidth',1)
 xlabel('Tiempo [seg.]')
 ylabel('Corriente [A]')
-axis([to tf -1.3 2.6])
 grid minor
 
 legend('Corriente sin inductor',
