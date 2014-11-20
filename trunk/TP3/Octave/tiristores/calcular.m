@@ -18,7 +18,7 @@ xlabel('Tiempo [seg.]')
 ylabel('Tension [V]')
 axis([-0.0004 0.0025 -35 40])
 grid minor
-legend('Tension en el inductor sin diodo y con disparo corto','Location','Northoutside')
+legend('Tension en el inductor sin diodo y con disparo corto','Location','Northeast')
 
 print('V_L_sin_diodo_disparo_corto.png','-dpng');
 
@@ -30,7 +30,7 @@ xlabel('Tiempo [seg.]')
 ylabel('Corriente [A]')
 axis([-0.0004 0.0025 -0.2 0.35])
 grid minor
-legend('Corriente en el inductor sin diodo y con disparo corto','Location','Northoutside')
+legend('Corriente en el inductor sin diodo y con disparo corto','Location','Northeast')
 
 print('I_L_sin_diodo_disparo_corto.png','-dpng');
 
@@ -52,7 +52,7 @@ xlabel('Tiempo [seg.]')
 ylabel('Tension [V]')
 axis([-0.0002 0.0045 -35 32])
 grid minor
-legend('Tension en el inductor con diodo y con disparo corto','Location','Northoutside')
+legend('Tension en el inductor con diodo y con disparo corto','Location','Northeast')
 
 print('V_L_con_diodo_disparo_corto.png','-dpng');
 
@@ -64,7 +64,7 @@ xlabel('Tiempo [seg.]')
 ylabel('Corriente [A]')
 axis([-0.0002 0.0045 -0.28 0.25])
 grid minor
-legend('Corriente en el inductor con diodo y con disparo corto','Location','Northoutside')
+legend('Corriente en el inductor con diodo y con disparo corto','Location','Northeast')
 
 print('I_L_con_diodo_disparo_corto.png','-dpng');
 
@@ -84,7 +84,7 @@ xlabel('Tiempo [seg.]')
 ylabel('Tension [V]')
 axis([-0.0004 0.022 -26 32])
 grid minor
-legend('Tension en el inductor con diodo y con disparo largo','Location','Northoutside')
+legend('Tension en el inductor con diodo y con disparo largo','Location','Northeast')
 
 print('V_L_con_diodo_disparo_largo.png','-dpng');
 
@@ -96,6 +96,6 @@ xlabel('Tiempo [seg.]')
 ylabel('Corriente [A]')
 axis([-0.0004 0.022 -0.27 0.24])
 grid minor
-legend('Corriente en el inductor con diodo y con disparo largo','Location','Northoutside')
+legend('Corriente en el inductor con diodo y con disparo largo','Location','Northeast')
 
 print('I_L_con_diodo_disparo_largo.png','-dpng');

@@ -35,28 +35,19 @@ ylabel('Tension [V]')
 axis([to tf -11 10])
 grid minor
 
-print('tension_Vr.png','-dpng');
-
+print('tension_Vr.tex','-depslatexstandalone');
 
 # ------------ CALCULO DE CAPACIDAD ---------------------
 
 Ig18 = Vr18 / 18;
 dV18 = diff(Vg18)./diff(tiempo18);
 C18 = Ig18(1:end-1) ./dV18;
-#C18(~isfinite(C18))= 0; # valores inf y nan igual a cero
+
 C18_max = max(C18)
-
-
-Ig1k = Vr1k / 1e3;
-dV1k = diff(Vg1k)./diff(tiempo1k);
-C1k = Ig1k(1:end-1) ./dV1k;
-C1k(~isfinite(C1k))= 0; # valores inf y nan igual a cero
-C1k_max = max(C1k)
-
 
 figure
 hold on
-plot(tiempo18(1:end-1),C18,'b-','Linewidth',1)
+plot(tiempo18(396:480),C18(396:480),'b-','Linewidth',1)
 legend('Capacidad con Rg = 18',
 	   'Location','Northoutside')
 xlabel('Tiempo [seg.]')
@@ -64,17 +55,8 @@ ylabel('Capacidad [F]')
 grid minor
 print('capacidad18.png','-dpng');
 
-figure
-hold on
-plot(tiempo18,Vg18,'b-','Linewidth',1)
-legend('Vg con Rg = 18',
-	   'Location','Northoutside')
-xlabel('Tiempo [seg.]')
-ylabel('Tension [V]')
-grid minor
-print('Vg18.png','-dpng');
-
-
+C_min = C18(396)
+C_max = C18(480)
 
 #------------- CORRIENTE DEL IGBT Y POTENCIA SIN L -------------------------
 
@@ -90,10 +72,11 @@ hold on
 plot(tiempo, Ie, 'r-', 'Linewidth',1)
 xlabel('Tiempo [seg.]')
 ylabel('Corriente [A]')
+axis([to to+T -1.5 2.5])
 grid minor
 
 legend('Corriente sin inductor',
-	   'Location','Northoutside')
+	   'Location','Northeast')
 
 print('corriente_sin_L.png','-dpng');
 
@@ -104,6 +87,8 @@ ito = find(tiempo==to);
 itf = find(tiempo==tf);
 Pm_sin_L = (1/T) * trapz(tiempo(ito:itf), P(ito:itf))
 
+Peficaz_sin_L = sqrt((1/T) * trapz(tiempo(ito:itf), P(ito:itf).^2))
+
 
 figure
 hold on
@@ -113,8 +98,8 @@ ylabel('Potencia [W]')
 axis([to to+T -2 12])
 grid minor
 
-legend(sprintf('Potencia sin inductor  Pm = %e W', Pm_sin_L),
-	   'Location','Northoutside')
+legend('Potencia instantanea sin inductor',
+	   'Location','Northeast')
 
 print('Potencia_sin_L.png','-dpng');
 
@@ -136,7 +121,7 @@ axis([to tf -1.5 3])
 grid minor
 
 legend('Corriente con inductor',
-	   'Location','Northoutside')
+	   'Location','Northeast')
 
 print('corriente_con_L.png','-dpng');
 
@@ -146,6 +131,8 @@ P = Vce .* Ie;
 ito = find(tiempo==to);
 itf = find(tiempo==tf);
 Pm_con_L = (1/T) * trapz(tiempo(ito:itf), P(ito:itf))
+Peficaz_con_L = sqrt((1/T) * trapz(tiempo(ito:itf), P(ito:itf).^2))
+
 
 figure
 hold on
@@ -155,7 +142,7 @@ ylabel('Potencia [W]')
 axis([to to+T -6 30])
 grid minor
 
-legend(sprintf('Potencia con inductor  Pm = %e W', Pm_con_L),
-	   'Location','Northoutside')
+legend('Potencia instantanea con inductor ',
+	   'Location','Northeast')
 
 print('Potencia_con_L.png','-dpng');
