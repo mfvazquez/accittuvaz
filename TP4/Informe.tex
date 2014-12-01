@@ -20,7 +20,7 @@
 \usepackage{textcomp} % para usar ° con el comando \textdegree
 \usepackage{anysize}		%Permite modificar los margenes del documento
 \usepackage{abstract} % paquete para el resumen del articulo
- 
+\usepackage{amssymb}
 %---------------------------------------Configuraciones de pagina----------------------------------------------
 \marginsize{2.5cm}{2.5cm}{1cm}{1cm}
 
@@ -78,18 +78,52 @@
 \maketitle
 
 \begin{abstract} %Resumen
-\emph{}
+\emph{En el siguiente trabajo se realiza el diseño y construcción de un
+mini-amplificador de audio empleando un amplificador de source común.}
 \end{abstract}
 
-\section{Desarrollo}
+\section{Especificaciones}
 
+Se requiere construir un circuito simple que amplifique la tensión que
+genera un micrófono de bobina móvil de $600\, \unit{\Omega}$, considerando
+que mantenga una señal de $25\, \unit{m\widehat{V}}$, para que pueda ser digitalizada
+por un convertor digital {\bf MAX1393}. El grabador se alimenta con
+una batería de $1.5\,\unit{V}$ ($1200\, \unit{mAh}$ de carga), y debe
+minimizarse tanto como sea posible el consumo de potencia del sistema.
+Las condiciones de diseño del amplificador son:
+
+\begin{itemize}
+\item La salida del amplificador debe permitir la máxima excursión
+posible entre $0\, \unit{V}$ y $5\, \unit{V}$, que es el rango de entrada
+del conversor A/D.
+\item La resistencia de salida del amplificador debe ser menor a $5\, \unit{k\Omega}$.
+\item La potencia de contínua debe ser tal que permita su uso por más de
+$24\, \unit{hs}$.
+\item Se debe obtener la mayor ganancia posible, respetando lo anterior.
+\item El amplificador debe ser emisor común, es decir, debe utilizarse
+el transistor {\bf TBJ BC548}.
+\item Se debe considerar que la resistencia que presenta el conversor A/D
+al amplificador es mayor a $1\, \unit{M\Omega}$.
+\end{itemize} 
+
+\section{Diseño del amplificador}
+
+Se definió el circuito mostrado en la figura \ref{circuito:amplificador}.
+Utilizando los siguientes valores.
+\begin{itemize}
+\item $R_S = 600\, \unit{\Omega}$
+\item $R_L = 1\, \unit{M\Omega}$
+\item $V_{CC} = 1.5\, \unit{V}$
+\item $v_s = 25\, \unit{m\widehat{V}}$ 
+\item $C_{in} = C_{out} = 1\, \unit{\mu F}$
+\end{itemize}
 
 \begin{figure}[H]
 \centering
 \begin{circuitikz}[american]\shorthandoff{>}
 \draw 
 (5,1) node[npn](npn){BC548B}
-(0,0)  node[ground]{} to [sV, l=$v_{in}$] (0,1) 
+(0,0)  node[ground]{} to [sV, l=$v_s$] (0,1) 
 to [R, l=$R_S$] (2,1)
 to [C, l=$C_{in}$] (3,1)-- (npn.base)
 (2,3) node[ground]{} to [V, l=$V_{CC}$] (2,4)
@@ -100,10 +134,26 @@ to [R, l=$R_C$] (5,2) -- (npn.collector)
 (8,0)  node[ground]{} to [R, l_=$R_L$] (8,1.77) 
 to [C, l_=$C_{out}$] (5.5,1.77) -- (npn.collector)
 ;\end{circuitikz}
-\caption{Circuito }
+\caption{Circuito amplificador}
 \label{circuito:amplificador}
 \end{figure}
 
+Para los calculos se utilizaron los parámetros obtenidos del transistor 1
+en el Trabajo Práctico N\textdegree2 ya que es el transistor que se utilizará
+al armar el circuito.
+
+\begin{itemize}
+\item $\beta = 361$
+\item $V_{th} = 26.95\, \unit{mV}$
+\item $V_{A} = 36.05\, \unit{V}$
+\item $V_{BE} = 0.7 \, \unit{V}$
+\end{itemize}
+
+\subsection{Punto de polarización}
+
+Considerando a los capacitores como circuitos abieirtos y 
+pasivando la fuente de señal $v_s$ obtenemos el circuito mostrado en 
+la figura \ref{circuito:amplificador_dc}.
 
 \begin{figure}[H]
 \centering
@@ -114,21 +164,75 @@ to [C, l_=$C_{out}$] (5.5,1.77) -- (npn.collector)
 to [R, l=$R_B$] (4.5,1) --  (npn.base)
 (2,1) to [short] (2,2.5)
 to [R, l=$R_C$] (5,2.5) -- (npn.collector)
-(5,0)node[ground]{} -- (npn.emitter) 
-(7,0)  node[ground]{} to [R, l_=$R_L$] (7,1.77) 
-to [short] (5.5,1.77) -- (npn.collector)
+(5,0)node[ground]{} -- (npn.emitter)
+(5,2.5) to [short, -o, l=$V_{OUT}$] (5.5,2.5) 
 ;\end{circuitikz}
-\caption{Circuito }
+\caption{Circuito amplificador en DC}
 \label{circuito:amplificador_dc}
 \end{figure}
+
+Se consideró la ecuación \ref{eq:VOUT} para los calculos ya que es
+cuando se obtiene la máxima eficiencia.
+
+\begin{equation}
+V_{OUT} = \frac{V_{CC}}{2}
+\label{eq:VOUT}
+\end{equation}
+
+Asumiendo que el TBJ está en MAD y aplicando mallas al circuito de 
+la figura \ref{circuito:amplificador_dc} obtenemos las siguientes 
+ecuaciones:
+
+\[ \displaystyle V_{CC} - V_{BE} = I_B R_B\]
+
+\[ \displaystyle V_{CC} - V_{OUT} = I_C R_C\]
+
+Y teniendo cuenta que $I_C = \beta I_B$ y la ecuación numero \ref{eq:VOUT}
+obtenemos las siguientes relaciones de $R_C$ y $R_B$ respecto a $I_C$:
+
+\begin{equation}
+R_C = \frac{V_{CC}}{2 I_C}
+\label{eq:RC}
+\end{equation}
+
+\begin{equation}
+R_B = \frac{(V_{CC} - V_{BE}) \beta}{I_C}
+\label{eq:RC}
+\end{equation}
+
+Luego se verificó que el punto Q este en zona de MAD teniendo en cuenta
+la ecuación \ref{eq:RC}:
+
+\[ \displaystyle V_{CE} = V_{CC} - I_C R_C = V_{CC} - \frac{V_{CC}}{2} = \frac{V_{CC}}{2} = 0.75\, \unit{V} > V_{CE_{sat}} \approx 0.2\, \unit{V} \]
+
+Finalmente, debido a que la potencia de contínua debe ser tal que permita su uso
+por más de $24\, \unit{hs}$ y la batería cuenta con $1200\, \unit{mAh}$
+de carga, podemos obtener la cota maxima de la corriente $I_{C}$.
+
+\[ \displaystyle I_{C} \leqslant \frac{1200\, \unit{mAh}}{24\, \unit{hs}} \]
+
+Por lo tanto:
+
+\begin{equation}
+I_{C} \leqslant 50\, \unit{mA}
+\label{eq:IC_max}
+\end{equation}
+
+
+\subsection{Modelo de pequeña señal}
+
+Pasivando las fuentes de tensión continua y reemplazando el transistor
+por su modelo equivalente de pequeña señal, obtenemos el circuito
+de la figura \ref{circuito:amplificador_ac}.
 
 \begin{figure}[H]
 \centering
 \begin{circuitikz}[american]\shorthandoff{>}
 \draw 
-(4,0)  node[ground]{} to [R, l=$R_B$] (4,2) 
-(2,0) to [R, l=$r_{\pi}$] (2,2)
-(0,0) to [sV, l=$v_{in}$] (0,2)
+(5,0)  node[ground]{}
+(4,0) to [R, l=$R_B$] (4,2) 
+(2,2) to [R, l_=$r_{\pi}$, v^=$v_{be}$] (2,0)
+(0,0) to [sV, l=$v_s$] (0,2)
 to [R,l=$R_S$] (2,2)
 to [short] (4,2)
 (0,0) to [short] (10,0)
@@ -138,9 +242,185 @@ to [short] (4,2)
 (6,2) to [short] (10,2)
 to [short, -o, l=$v_{out}$] (10.5,2)
 ;\end{circuitikz}
-\caption{Circuito }
+\caption{Circuito amplificador en AC}
 \label{circuito:amplificador_ac}
 \end{figure}
 
+\begin{equation}
+r_\pi = \frac{V_{th} \beta}{I_C}
+\label{eq:rpi}
+\end{equation}
+
+\begin{equation}
+g_m = \frac{I_C}{V_{th}}
+\label{eq:gm}
+\end{equation}
+
+\begin{equation}
+r_o = \frac{V_A}{I_C}
+\label{eq:ro}
+\end{equation}
+
+Del circuito \ref{circuito:amplificador_ac} se obtiene $v_{out}$
+
+\[ \displaystyle v_{out} = -g_m v_{be} (r_o // R_C) \]
+
+Luego la ganancia de tensión sin carga es
+
+\[ \displaystyle A_{vo} = \frac{v_{out}}{v_{be}} = -gm (r_o // R_C) \]
+
+Reemplazando las ecuaciones \ref{eq:RC}, \ref{eq:gm} y \ref{eq:ro} se obtiene
+
+\[ \displaystyle A_{vo} = -\frac{I_C}{V_{th}} \frac{\frac{V_A V_{CC}}{2 I_C^2}}{\frac{V_A}{I_C} + \frac{V_{CC}}{2 I_C}} \]
+
+Simplificando se obtiene
+
+\begin{equation}
+\displaystyle A_{vo} = -\frac{V_A V_{CC}}{V_{th} (2 V_A + V_{CC})}
+\label{eq:Avo}
+\end{equation}
+
+Reemplazando los valores obtenemos la ganancia $A_{vo}$
+
+\[ \displaystyle A_{vo} = -28.26 \]
+
+A continuación se analizaron las tres causas de distorsión para obtener las
+cotas de $I_C$
+
+\subsubsection{Distorsión por alinealidad}
+
+Para que se pueda utilizar el modelo de pequeña señal del TBJ, se
+debe cumplir que $v_{be} \leqslant 10\,\unit{m\widehat{V}}$, ya que este valor es una 
+cota máxima en la que una vez superado se pierde la linealidad de las 
+ecuaciones utilizadas y se observa la distorsión en la salida con 
+respecto a la señal de entrada, por lo tanto se calcula el valor  
+máximo de $r_{\pi}$ para que al conectar el microfono en la entrada 
+(con su resistencia interna), la caída de tensión $v_{be}$ no supere este valor 
+maximo.
+
+Primero se obtiene la cota de $v_{out}$ para poder compararla con las
+cotas de las otras distorsiónes. Y recordando que $v_{be}$ y $v_{out}$
+están en contra fase:
+
+\[ \displaystyle v_{be;max} = \frac{v_{out;min}}{A_{vo}} = 10\,\unit{m\widehat{V}}\]
+
+Se despeja y calcula $v_{out;min}$
+
+\[ \displaystyle v_{out;min} = v_{be;max} A_{vo} = 10\,\unit{m\widehat{V}} (-28.26) = -282.6 \,\unit{m\widehat{V}}\]
+
+Como $v_{out}$ es una señal sinusoidal $v_{out;max} = -v_{out;min}$ entonces
+$v_{out;max} = 282.6 \,\unit{m\widehat{V}}$. 
+Por lo tanto la cota de $v_{out}$ para la distorsión por alinealidad será:
+
+\begin{equation}
+v_{out} \leqslant 282.6\, \unit{mV}
+\label{eq:vout_alinealidad}
+\end{equation}
+
+
+Luego asumiendo que $r_\pi << R_B$ se obtiene $(r_\pi // R_B) \approx r_\pi$.
+Con la aproximación anterior resolvemos el divisor de tensión del circuito
+de la figura \ref{circuito:amplificador_ac} entre las resistencias $r_\pi$
+y $R_S$.
+
+\[ \displaystyle v_{be} = v_s \frac{r_\pi}{R_S + r_\pi} \]
+
+Como $v_{be} \leqslant 10\, \unit{m\widehat{V}}$:
+
+\[ \displaystyle v_s \frac{r_\pi}{R_S + r_\pi} \leqslant 10\,\unit{m\widehat{V}}\]
+
+Despejando $r_\pi$ y reemplazando datos se obtiene:
+
+\begin{equation}
+r_\pi \leqslant 400\, \unit{\Omega}
+\label{eq:rpi_cota}
+\end{equation}
+
+Finalmente reemplazando la ecuación \ref{eq:rpi} en la inecuación \ref{eq:rpi_cota}
+se obtiene:
+
+\[ \displaystyle \frac{V_{th} \beta}{I_C} \leqslant 400\, \unit{\Omega} \]
+
+Despejando $I_C$ y reemplazando datos obtenemos:
+
+\begin{equation}
+I_C \geqslant 24.32\, \unit{mA}
+\label{eq:IC_alinealidad}
+\end{equation}
+
+\subsubsection{Distorsión por corte}
+
+Para $v_s$ demasiado negativa el transistor entra en corte, entonces
+toda la corriente de señal circula por la resistencia $R_C$.
+
+Se calcula la cota maxima de $v_{out}$, reemplazando la ecuación \ref{eq:VOUT}
+
+\[ \displaystyle v_{out;max} = V_{CC} - V_{OUT} = 1.5\, \unit{V} - 0.75\, \unit{V} = 0.75\, \unit{V} \]
+
+Por lo tanto la cota de $v_{out}$ para la distorsión por corte será:
+
+\begin{equation}
+v_{out} \leqslant 750\, \unit{mV}
+\label{eq:vout_corte}
+\end{equation}
+
+La cota maxima de $v_{out}$ por alinealidad es menor a la cota por corte. Por
+lo que evitando la distorsion por alinealidad se estará evitando la
+distorsión por corte.
+
+\subsubsection{Distorsión por saturación}
+
+Para $v_s$ muy positiva el TBJ entra en régimen de saturación. El caso
+límite tolerable es:
+
+\[ \displaystyle v_{out;max} = V_{OUT} - V_{sat} = 0.75\, \unit{V} - 0.3\, \unit{V} = 0.45\, \unit{V} \]
+
+Por lo tanto la cota de $v_{out}$ para la distorsión por saturación será:
+
+\begin{equation}
+v_{out} \leqslant 450\, \unit{mV}
+\label{eq:vout_corte}
+\end{equation}
+
+Nuevamente la cota maxima de $v_{out}$ por alinealidad es menor a la cota por saturación.
+Por lo tanto evitando distorsión por alinealidad se estará también evitando
+distorsión por saturación.
+
+\subsection{Elección de $I_C$, $R_C$ y $R_B$}
+
+La cota mínima de $I_C$ es debido a la distorsión por alinealidad y
+su cota maxima es debido a que el amplificador pueda ser usado por más
+de $24 \unit{hs}$.
+
+\begin{equation}
+24.32\, \unit{mA}\leqslant I_C \leqslant 50\, \unit{mA}
+\label{eq:IC_cotas}
+\end{equation}
+
+Mediante las ecuaciónes \ref{eq:RC} y \ref{eq:RB} obtenemos las cotas para $R_C$
+y $R_B$, respectivamente.
+
+\begin{equation}
+30.84\, \unit{\Omega}\leqslant R_C \leqslant 15\, \unit{\Omega}
+\label{eq:RC_cotas}
+\end{equation}
+
+\begin{equation}
+11.88\, \unit{k\Omega}\leqslant R_B \leqslant 5.78\, \unit{k\Omega}
+\label{eq:RB_cotas}
+\end{equation}
+
+
+\subsection{Cálculo teórico}
+
+\subsection{Dispersión de $\beta$}
+
+\subsection{Comparación con source común}
+
+\section{Simulación del circuito}
+
+\section{Mediciones del circuito}
+
+\section{Conclusiones}
 
 \end{document}
