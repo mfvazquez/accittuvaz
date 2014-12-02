@@ -212,6 +212,8 @@ la ecuación \ref{eq:RC}:
 Finalmente, debido a que la potencia de continua debe ser tal que permita su uso
 por más de $24\, \unit{hs}$ y la batería cuenta con $1200\, \unit{mAh}$
 de carga, podemos obtener la cota máxima de la corriente $I_{C}$.
+Se consideró también la corriente $I_B$ despreciable respecto a $I_C$,
+así toda la corriente suministra la batería será $I_C$.
 
 \[ \displaystyle I_{C} \leqslant \frac{1200\, \unit{mAh}}{24\, \unit{hs}} \]
 
@@ -284,7 +286,8 @@ Simplificando se obtiene
 \label{eq:Avo}
 \end{equation}
 
-Es importante notar que $A_{vo}$ sólo depende de $V_{CC}$.
+Es importante notar que $A_{vo}$ sólo depende de $V_{CC}$, ya que
+para un mismo transistor $V_A$ y $V_{th}$ permanecen constantes.
 
 Reemplazando los valores obtenemos la ganancia $A_{vo}$
 
@@ -425,7 +428,7 @@ normalizado mas cercano al calculado $R_B = 8.2\, \unit{k\Omega}$.
 Por lo tanto los valores a utilizar serán:
 
 \[ \displaystyle I_C = 35\, \unit{mA} \]
-\[ \displaystyle R_C = 25\, \unit{\Omega}\]
+\[ \displaystyle R_C = 24\, \unit{\Omega}\]
 \[ \displaystyle R_B = 8.2\, \unit{k\Omega}\]
 
 
@@ -457,13 +460,13 @@ picos positivos, por lo que nos manejaremos con los módulos de las ganancias}:
 
 \item $\displaystyle V_{BE} = V_{CC} - I_B R_B = 1.5\, \unit{V} - 96.95\, \unit{\mu A}\ 10\, \unit{k\Omega} = 530.5\, \unit{mV}$
 
-\item $\displaystyle V_{CE} = V_{CC} - I_C R_C = 1.5\, \unit{V} - 35\, \unit{mA}\ 25\, \unit{\Omega} = 625\, \unit{mV}$
+\item $\displaystyle V_{CE} = V_{CC} - I_C R_C = 1.5\, \unit{V} - 35\, \unit{mA}\ 24\, \unit{\Omega} = 660\, \unit{mV}$
 
 \item $\displaystyle R_{IN} = r_\pi//R_B = \frac{270.76\, \unit{\Omega}\ 8.2\, \unit{k\Omega}}{270.76\, \unit{\Omega} + 8.2\, \unit{k\Omega}} = 262.1\, \unit{\Omega}$
 
 \item $\displaystyle R_{OUT} = r_o // R_C = \frac{1.03\, \unit{k\Omega}\ 25\, \unit{\Omega}}{1.03\, \unit{k\Omega} + 25\, \unit{\Omega}} = 24.41\, \unit{\Omega}$
 
-\item $\displaystyle \eta = \frac{P_{OUT}}{P_{DC}} = \frac{\frac{v_{out}^2}{2 R_C}}{V_{CC} I_C} = \frac{v_{OUT}^2}{2 R_C V_{CC} I_C} = \frac{(625\,\unit{mV})^2}{2\ 25\, \unit{\Omega}\ 1.5\, \unit{V}\ 35\, \unit{mA}} = 0.1488 \Longrightarrow \eta_{\%} = 14.88\, \unit{\%} $
+\item $\displaystyle \eta = \frac{P_{OUT}}{P_{DC}} = \frac{\frac{v_{out}^2}{2 R_C}}{V_{CC} I_C} = \frac{v_{OUT}^2}{2 R_C V_{CC} I_C} = \frac{(625\,\unit{mV})^2}{2\ 24\, \unit{\Omega}\ 1.5\, \unit{V}\ 35\, \unit{mA}} = 0.155 \Longrightarrow \eta_{\%} = 15.5\, \unit{\%} $
 
 
 \end{itemize}
@@ -493,14 +496,14 @@ para ambos casos ya que no varían.
 
 	\begin{itemize}
 	\item $\displaystyle I_C = I_B \beta = 96.95\, \unit{\mu A}\ 200 = 19.39\, \unit{mA}$
-	\item $\displaystyle V_{CE} = V_{CC} - I_C R_C = 1.5\, \unit{V}\ - 19.39\, \unit{mA}\ 25\, \unit{\Omega} = 1.02\, \unit{V}$
+	\item $\displaystyle V_{CE} = V_{CC} - I_C R_C = 1.5\, \unit{V}\ - 19.39\, \unit{mA}\ 24\, \unit{\Omega} = 1.03\, \unit{V}$
 	\end{itemize}
 
 \item $\beta = \beta_{max} = 450$
 
 	\begin{itemize}
 	\item $\displaystyle I_C = I_B \beta = 96.95\, \unit{\mu A}\ 450 = 43.63\, \unit{mA}$
-	\item $\displaystyle V_{CE} = V_{CC} - I_C R_C = 1.5\, \unit{V}\ - 43.63\, \unit{mA}\ 25\, \unit{\Omega} = 409.25\, \unit{mV}$
+	\item $\displaystyle V_{CE} = V_{CC} - I_C R_C = 1.5\, \unit{V}\ - 43.63\, \unit{mA}\ 24\, \unit{\Omega} = 453\, \unit{mV}$
 	\end{itemize}
 
 \end{itemize}
@@ -528,6 +531,8 @@ la dispersión de $\beta$.
 \section{Simulación del circuito}
 
 Se simuló mediante \emph{Spice} el circuito de la figura \ref{circuito:amplificador}.
+Siendo $R_C = 24\, \unit{\Omega}$ y $R_B = 8.2\, \unit{k\Omega}$ y
+los capacitores de $1\, \unit{\mu F}$.
 Se utilizó como transistor un modelo genérico modificado con los datos
 del transistor utilizado en los cálculos teóricos. Utilizamos este modelo
 de transistor ya que es el que tiene menos diferencias con el transistor
@@ -562,7 +567,7 @@ Luego se obtuvieron todos los parámetros calculados en la sección anterior:
 
 \item $\displaystyle V_{CE} = 600\, \unit{mV}$
 
-\item $\displaystyle \eta = \frac{v_{OUT}^2}{2 R_C V_{CC} I_C} = \frac{(600\,\unit{mV})^2}{2\ 25\, \unit{\Omega}\ 1.5\, \unit{V}\ 36\, \unit{mA}} = 0.1334 \Longrightarrow \eta_{\%} = 13.34\, \unit{\%} $
+\item $\displaystyle \eta = \frac{v_{OUT}^2}{2 R_C V_{CC} I_C} = \frac{(600\,\unit{mV})^2}{2\ 24\, \unit{\Omega}\ 1.5\, \unit{V}\ 36\, \unit{mA}} = 0.1389 \Longrightarrow \eta_{\%} = 13.89\, \unit{\%} $
 
 \end{itemize}
 
@@ -608,7 +613,8 @@ to [short, l= esquema amplificador](3.5,-1)
 \end{figure}
 
 Se obtuvo de la simulación la tensión $v_x = 5.5\, \unit{m\widehat{V}}$.
-Luego se planteó el divisór de tensión entre $R_p$ y $R_{IN}$:
+Luego se planteó el divisór de tensión entre $R_p$ y $R_{IN}$ despreciando
+la impedancia del capacitor $Z_C$ frente a las resistencias:
 
 \[ \displaystyle v_x = v_p \frac{R_{IN}}{R_p + R_{IN}} \]
 
@@ -761,8 +767,11 @@ $\eta_{\%} $ & $14.88\, \unit{\%} $ 	& $13.34\, \unit{\%} $ & $10.3\, \unit{\%} 
 \section{Mediciones del circuito}
 
 Se armó en un \emph{protoboard} el circuito del amplificador diseñado
-mostrado en la figura \ref{fig:amplificador} y re realizaron las mediciones
+mostrado en la figura \ref{circuito:amplificador}  y re realizaron las mediciones. 
 de todos los parámetros antes calculados.
+Siendo $R_C = 24\, \unit{\Omega}$ y $R_B = 8.2\, \unit{k\Omega}$ resistencias
+con tolerancia del $1\, \unit{\%}$ y
+los capacitores de $1\, \unit{\mu F}$.
 
 \subsection{Emulación de la fuente de señal y la carga}
 
@@ -877,7 +886,9 @@ resultado se obtuvieron las señales de la figura \ref{fig:medicion_entrada_sali
 Como se puede apreciar la señal de salida se encuentra distorsionada. Alcanza
 un valor pico de $75\, \unit{m\widehat{V}}$ cuando en la simulación se
 alcanzó un valor de $240\, \unit{m\widehat{V}}$. Esto ocurre debido
-al mal funcionamiento del transistor utilizado. Como podemos ver en la
+al mal funcionamiento del transistor utilizado ya que en las hojas de
+datos se indica que con $V_{CE} = 0.3\, \unit{V}$ deberia estar MAD. 
+Como podemos ver en la
 figura \ref{fig:ic_vce} obtenida en el Trabajo Práctico N\textdegree2
 el transistor entra en región de MAD al alcanzar una tensión 
 $V_{CE} \approx 1.4\, \unit{V}$ y contando solo con una fuente $V_{CC} = 1.5\, \unit{V}$
@@ -917,6 +928,8 @@ el correcto funcionamiento de los componentes antes de utilizarlos. En
 este trabajo se utilizaron transistores con los cuales no se pudo obtener
 una señal amplificada sin distorsiones debido a que la tensión $V_{CE}$
 para entrar en régimen MAD era mayor a la obtenida en las hojas de datos.
+Por eso es importante haber verificado antes las curvas de salida del
+transistor.
 
 Otro problema importante es la dispersión del $\beta$ ya que el circuito
 diseñado puede presentar distorsiones con distintos transistores. Por
